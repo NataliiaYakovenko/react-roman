@@ -1,21 +1,42 @@
 
-class HeaderComponent extends React.Component{
-  render(){  // єдиний метод, який ми зобов'язані визначити в класі
-    console.log(this.props);
-    const p = React.createElement('p',{}, 'Super paragraph')
-    const h2 = React.createElement('h2',{title:'Hi!'},`Hello ${this.props.name}`)
-    const article = React.createElement('article',{},h2,p)
-    return article;
-  }
-}
-const componrnt = React.createElement(HeaderComponent,{name:'Nataliia'},'Test --> Nataliia')
-const componrnt2 = React.createElement(HeaderComponent,{name:'Roland'},'Test --> Roland')
-const parentElement = React.createElement('section',{},componrnt,componrnt2)
+class Counter extends React.Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            count: 0
+        };
+    }
+    increment(){
+        // todo: state.count++
+        this.setState({
+            count: this.state.count +1
+        })
+        console.log('CLICK');
+    }
 
+    render(){
+        const h2 = React.createElement('h2',{},this.state.count)
+        const button = React.createElement('button',{onClick: ()=>{this.increment()}}, '+')
+        return React.createElement(React.Fragment,{},h2,button);
+
+    }
+}
+const component = React.createElement(Counter)
 
 const root = document.querySelector('#root')
+ReactDOM.render(component,root)
 
-ReactDOM.render(parentElement, root)
+
+
+
+
+
+
+
+
+
+
+
 //-------------------------------------------------------------------------------
 /*
 1. Реакт - це бібліотека для створення користувацьких інтерфейсів
@@ -32,6 +53,7 @@ ReactDOM.render(parentElement, root)
 Реак-елемент набагато легший ніж той, що у нативному DOMi
 6. З цих Рект-елементів, як з маленьких блоків складаються Реак-компоненти
 А з Реакт-компонент складаються сторінки, які будуть бачити наші користувачі.
+7. Стан-конпоненти - це такі данні, які можуть змінюватись за час життя нашої компоненти
 
 */
 
