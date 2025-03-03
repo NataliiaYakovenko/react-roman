@@ -1,8 +1,8 @@
-
-
 /*
 Зробіть той самий counter, який крім інкременту буде ще й декрементувати лічильник
 Лічильник не має опускатися нижчі нуля
+Реалізувати крок лічільника
+
 
 */
 
@@ -11,26 +11,37 @@ class Counter extends React.Component {
     super(props);
     this.state = {
       count: 0,
+      step: 1,
     };
   }
   increment() {
     this.setState({
-      count: this.state.count + 1,
+      count: this.state.count + this.state.step,
     });
   }
 
   decrement() {
     if (this.state.count > 0) {
       this.setState({
-        count: this.state.count - 1,
-      })
-    } else if (this.state.count === 0){
-        alert('Лічильник не повинен дорівнювати 0')
+        count: this.state.count - this.state.step,
+      });
+    } else if (this.state.count === 0 || (this.state.count - this.state.step) < 0) {
+      alert("Лічильник не повинен дорівнювати 0");
     }
   }
 
   render() {
-    const h2 = React.createElement("h2", {}, this.state.count);
+    const counter = React.createElement(
+      "h2",
+      {},
+      `Значення лічильника: ${this.state.count}`
+    );
+    const step = React.createElement(
+      "h2",
+      {},
+      `Значення кроку: ${this.state.step}`
+    );
+
     const buttonIncrement = React.createElement(
       "button",
       {
@@ -40,6 +51,7 @@ class Counter extends React.Component {
       },
       "+"
     );
+
     const buttonDecrement = React.createElement(
       "button",
       {
@@ -49,12 +61,27 @@ class Counter extends React.Component {
       },
       "-"
     );
+
+    const setStepButton = React.createElement(
+      "button",
+      {
+        onClick: () => {
+          this.setState({
+            step: Number(prompt("Введіть нове значення для кроку:"))
+          })
+        },
+      },
+      "Встановити нове значення для кроку"
+    );
+
     return React.createElement(
       React.Fragment,
       {},
-      h2,
+      counter,
       buttonIncrement,
-      buttonDecrement
+      buttonDecrement,
+      step,
+      setStepButton
     );
   }
 }
