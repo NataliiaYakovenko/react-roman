@@ -1,10 +1,6 @@
-/*
-Зробіть той самий counter, який крім інкременту буде ще й декрементувати лічильник
-Лічильник не має опускатися нижчі нуля
-Реалізувати крок лічільника
 
-
-*/
+import React from "react";
+import ReactDOM from "react-dom";
 
 class Counter extends React.Component {
   constructor(props) {
